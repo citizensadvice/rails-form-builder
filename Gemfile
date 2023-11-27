@@ -6,6 +6,8 @@ source "https://rubygems.org"
 gemspec
 
 gem "citizens-advice-style", github: "citizensadvice/citizens-advice-style-ruby", tag: "v10.0.1"
+gem "nokogiri"
+gem "pry"
 gem "rake", "~> 13.0"
 gem "rspec", "~> 3.0"
 gem "rubocop-rake"
