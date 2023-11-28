@@ -20,6 +20,13 @@ RSpec.describe CitizensAdviceFormBuilder::FormBuilder do
 
       expect(parsed_result.at_css("input").attributes["value"].value).to eq "Save changes"
     end
+
+    it "renders a submit button with a custom label" do
+      result = builder.cads_button("Next")
+      parsed_result = Nokogiri::HTML::DocumentFragment.parse(result)
+
+      expect(parsed_result.at_css("input").attributes["value"].value).to eq "Next"
+    end
   end
 
   describe "#cads_text_field" do
@@ -27,7 +34,15 @@ RSpec.describe CitizensAdviceFormBuilder::FormBuilder do
       result = builder.cads_text_field(:name)
       parsed_result = Nokogiri::HTML::DocumentFragment.parse(result)
 
+      expect(parsed_result.at_css("label").content).to eq "Name"
       expect(parsed_result.at_css("input").attributes["value"].value).to eq "Fred Flintstone"
+    end
+
+    it "renders a text field with a custom label" do
+      result = builder.cads_text_field(:name, label: "First name")
+      parsed_result = Nokogiri::HTML::DocumentFragment.parse(result)
+
+      expect(parsed_result.at_css("label").content).to eq "First name"
     end
   end
 end
