@@ -6,6 +6,12 @@ source "https://rubygems.org"
 gemspec
 
 gem "citizens-advice-style", github: "citizensadvice/citizens-advice-style-ruby", tag: "v10.0.1"
+
+gem "citizens_advice_components",
+    github: "citizensadvice/design-system",
+    tag: "v5.6.0",
+    glob: "engine/*.gemspec"
+
 gem "nokogiri"
 gem "pry"
 gem "rake", "~> 13.0"
