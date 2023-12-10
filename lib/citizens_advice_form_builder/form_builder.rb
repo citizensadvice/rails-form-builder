@@ -12,21 +12,17 @@ require CitizensAdviceComponents::Engine.root.join("app", "components", "citizen
 module CitizensAdviceFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder
     def cads_text_field(attribute, label: nil)
-      label_text = label || object.class.human_attribute_name(attribute)
-
-      model_name = object.class.model_name.param_key
-      id = @template.field_id(model_name, attribute)
-      name = @template.field_name(model_name, attribute)
+      label ||= object.class.human_attribute_name(attribute)
 
       component = CitizensAdviceComponents::TextInput.new(
-        name: id,
-        label: label_text,
+        name: id_for(attribute),
+        label: label,
         type: :text,
         options: {
           optional: true,
           value: object.send(attribute),
-          error_message: object.errors[attribute].first,
-          additional_attributes: { name: name }
+          error_message: error_message_for(attribute),
+          additional_attributes: { name: name_for(attribute) }
         }
       )
 
@@ -38,6 +34,20 @@ module CitizensAdviceFormBuilder
       component.with_content(value)
 
       component.render_in(@template)
+    end
+
+    private
+
+    def id_for(attribute)
+      @template.field_id(object_name, attribute)
+    end
+
+    def name_for(attribute)
+      @template.field_name(object_name, attribute)
+    end
+
+    def error_message_for(attribute)
+      object.errors[attribute]&.first
     end
   end
 end

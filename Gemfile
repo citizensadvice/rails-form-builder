@@ -12,7 +12,6 @@ gem "citizens_advice_components",
     tag: "v5.6.0",
     glob: "engine/*.gemspec"
 
-gem "nokogiri"
 gem "pry"
 gem "rake", "~> 13.0"
 gem "rspec", "~> 3.0"

@@ -3,46 +3,53 @@
 class ExampleForm
   include ActiveModel::Model
 
-  attr_accessor :name
+  attr_accessor :name, :required_field
+
+  validates :required_field, presence: true
 end
 
 RSpec.describe CitizensAdviceFormBuilder::FormBuilder do
   let(:controller) { ActionController::Base.new }
   let(:lookup_context) { ActionView::LookupContext.new(nil) }
-  let(:helper) { ActionView::Base.new(lookup_context, {}, controller) }
-  let(:object) { ExampleForm.new(name: "Fred Flintstone") }
-  let(:builder) { described_class.new(:example_form, object, helper, {}) }
+  let(:template) { ActionView::Base.new(lookup_context, {}, controller) }
+
+  let(:model) { ExampleForm.new(name: "Fred Flintstone") }
+  let(:builder) { described_class.new(:example_form, model, template, {}) }
+
+  let(:component_double) { instance_double(component, with_content: nil, render_in: nil) }
+
+  before { allow(component).to receive(:new).and_return(component_double) }
 
   describe "#cads_button" do
-    it "renders a submit button" do
-      result = builder.cads_button
-      parsed_result = Nokogiri::HTML::DocumentFragment.parse(result, &:noblanks)
+    let(:component) { CitizensAdviceComponents::Button }
 
-      expect(parsed_result.at_css("button").text).to include "Save changes"
+    it "calls the button component with default parameters" do
+      builder.cads_button
+
+      expect(component).to have_received(:new).with(type: :submit, variant: :primary)
+      expect(component_double).to have_received(:with_content).with("Save changes")
     end
 
-    it "renders a submit button with a custom label" do
-      result = builder.cads_button("Next")
-      parsed_result = Nokogiri::HTML::DocumentFragment.parse(result, &:noblanks)
+    it "calls the button component with a custom label text" do
+      builder.cads_button "Next"
 
-      expect(parsed_result.at_css("button").text).to include "Next"
+      expect(component_double).to have_received(:with_content).with("Next")
     end
   end
 
   describe "#cads_text_field" do
-    it "renders a text field" do
-      result = builder.cads_text_field(:name)
-      parsed_result = Nokogiri::HTML::DocumentFragment.parse(result, &:noblanks)
+    let(:component) { CitizensAdviceComponents::TextInput }
 
-      expect(parsed_result.at_css("label").content).to include "Name"
-      expect(parsed_result.at_css("input").attributes["value"].value).to eq "Fred Flintstone"
+    it "calls the text input component with an attribute name" do
+      builder.cads_text_field(:name)
+
+      expect(component).to have_received(:new).with(hash_including(name: "example_form_name"))
     end
 
-    it "renders a text field with a custom label" do
-      result = builder.cads_text_field(:name, label: "First name")
-      parsed_result = Nokogiri::HTML::DocumentFragment.parse(result, &:noblanks)
+    it "calls the text input component with custom label text" do
+      builder.cads_text_field(:name, label: "First name")
 
-      expect(parsed_result.at_css("label").content).to include "First name"
+      expect(component).to have_received(:new).with(hash_including(label: "First name"))
     end
   end
 end

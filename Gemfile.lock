@@ -193,7 +193,6 @@ DEPENDENCIES
   citizens-advice-style!
   citizens_advice_components!
   citizens_advice_form_builder!
-  nokogiri
   pry
   rake (~> 13.0)
   rspec (~> 3.0)
