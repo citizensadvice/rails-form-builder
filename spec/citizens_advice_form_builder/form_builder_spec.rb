@@ -46,6 +46,12 @@ RSpec.describe CitizensAdviceFormBuilder::FormBuilder do
       expect(component).to have_received(:new).with(hash_including(name: "example_form_name"))
     end
 
+    it "passes the attribute's existing value to the text input component" do
+      builder.cads_text_field(:name)
+
+      expect(component).to have_received(:new).with(hash_including(options: hash_including(value: "Fred Flintstone")))
+    end
+
     it "passes custom label text to the text input component" do
       builder.cads_text_field(:name, label: "First name")
 
