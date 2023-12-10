@@ -11,7 +11,7 @@ require CitizensAdviceComponents::Engine.root.join("app", "components", "citizen
 
 module CitizensAdviceFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder
-    def cads_text_field(attribute, label: nil, required: false)
+    def cads_text_field(attribute, label: nil, hint: nil, required: false)
       label ||= object.class.human_attribute_name(attribute)
 
       optional = if required
@@ -25,6 +25,7 @@ module CitizensAdviceFormBuilder
         label: label,
         type: :text,
         options: {
+          hint: hint,
           optional: optional,
           value: object.send(attribute),
           error_message: error_message_for(attribute),

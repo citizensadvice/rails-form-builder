@@ -78,6 +78,14 @@ RSpec.describe CitizensAdviceFormBuilder::FormBuilder do
       end
     end
 
+    context "with 'hint' parameter" do
+      it "passes hint to the text input component" do
+        builder.cads_text_field(:name, hint: "Example hint")
+
+        expect(component).to have_received(:new).with(hash_including(options: hash_including(hint: "Example hint")))
+      end
+    end
+
     context "when there is a validation error" do
       it "sets 'error_message'" do
         model.errors.add(:name, :example, message: "example error")
