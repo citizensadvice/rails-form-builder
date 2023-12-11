@@ -17,6 +17,7 @@ RSpec.describe "example forms" do
     fill_in "First name", with: "Francis"
     fill_in "Last name", with: "Example"
     fill_in "Address", with: "42 Foundry Mews\r\nYaughton\r\nShropshire"
+    choose "Cat"
 
     # Submit form
     click_button "Save"
@@ -24,6 +25,9 @@ RSpec.describe "example forms" do
     expect(page).to have_field("person[first_name]", with: "Francis")
     expect(page).to have_field("person[last_name]", with: "Example")
     expect(page).to have_field("person[address]", with: "42 Foundry Mews\r\nYaughton\r\nShropshire")
+
+    # expect(page.find_field("Cat")).to be_checked
+    # expect(page.find_field("Dog")).not_to be_checked
 
     expect(page).to have_button("Save")
   end

@@ -4,5 +4,7 @@
   <%= f.cads_text_field :first_name %>
   <%= f.cads_text_field :last_name %>
   <%= f.cads_text_area :address, label: "Address" %>
+  <%= f.cads_collection_radio_buttons :favourite_animal, @animals, :id, :animal_type %>
+
   <%= f.cads_button "Save" %>
 <% end %>

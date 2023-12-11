@@ -12,6 +12,8 @@ require CitizensAdviceComponents::Engine.root.join("app", "components", "citizen
 
 module CitizensAdviceFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder
+    include ActionView::Helpers::FormOptionsHelper
+
     def cads_text_field(attribute, label: nil, hint: nil, required: false)
       label ||= object.class.human_attribute_name(attribute)
 
@@ -61,6 +63,35 @@ module CitizensAdviceFormBuilder
 
       component.render_in(@template)
     end
+
+    # rubocop:disable Metrics/MethodLength
+    # rubocop:disable Metrics/AbcSize
+    def cads_collection_radio_buttons(attribute, collection, value_method, text_method = nil, legend: nil)
+      legend ||= object.class.human_attribute_name(attribute)
+      text_method ||= value_method
+      current_value = object.send(attribute)
+
+      items = collection.map do |item|
+        # From ActionView::FormOptionsHelper
+        label = value_for_collection(item, text_method)
+        value = value_for_collection(item, value_method)
+
+        checked = value.eql?(current_value)
+
+        { name: name_for(attribute), label: label, value: value, checked: checked }
+      end
+
+      component = CitizensAdviceComponents::RadioGroup.new(
+        legend: legend,
+        name: id_for(attribute)
+      )
+
+      component.with_inputs(items)
+
+      component.render_in(@template)
+    end
+    # rubocop:enable Metrics/AbcSize
+    # rubocop:enable Metrics/MethodLength
 
     def cads_button(value = "Save changes")
       component = CitizensAdviceComponents::Button.new(type: :submit, variant: :primary)
