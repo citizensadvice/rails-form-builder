@@ -71,5 +71,15 @@ RSpec.describe CitizensAdviceFormBuilder::FormBuilder do
         expect(component).to have_received(:new).with(hash_including(options: hash_including(optional: true)))
       end
     end
+
+    context "when there is a validation error" do
+      it "sets 'error_message'" do
+        model.errors.add(:name, :example, message: "example error")
+
+        builder.cads_text_field(:name)
+
+        expect(component).to have_received(:new).with(hash_including(options: hash_including(error_message: "example error")))
+      end
+    end
   end
 end
