@@ -7,6 +7,8 @@ require "action_view"
 require "active_model"
 require "active_support"
 
+require "pry"
+
 require "citizens_advice_form_builder"
 
 require_relative "../spec/dummy/config/environment"

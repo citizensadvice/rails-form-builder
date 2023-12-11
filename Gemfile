@@ -5,6 +5,8 @@ source "https://rubygems.org"
 # Specify your gem's dependencies in citizens_advice_form_builder.gemspec
 gemspec
 
+gem "capybara"
+
 gem "citizens-advice-style", github: "citizensadvice/citizens-advice-style-ruby", tag: "v10.0.1"
 
 gem "citizens_advice_components",
