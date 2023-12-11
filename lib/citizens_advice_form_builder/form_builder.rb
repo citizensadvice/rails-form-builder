@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "action_view"
+require "active_support/core_ext/string/starts_ends_with"
 require "citizens_advice_components"
 
 require CitizensAdviceComponents::Engine.root.join("app", "lib", "citizens_advice_components", "fetch_or_fallback_helper")
