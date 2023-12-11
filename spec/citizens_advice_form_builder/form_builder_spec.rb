@@ -3,7 +3,7 @@
 class ExampleForm
   include ActiveModel::Model
 
-  attr_accessor :name, :required_field, :description
+  attr_accessor :name, :required_field, :description, :favourite_drink
 
   validates :required_field, presence: true
 end
@@ -13,7 +13,7 @@ RSpec.describe CitizensAdviceFormBuilder::FormBuilder do
   let(:lookup_context) { ActionView::LookupContext.new(nil) }
   let(:template) { ActionView::Base.new(lookup_context, {}, controller) }
 
-  let(:model) { ExampleForm.new(name: "Fred Flintstone", description: "Lorem ipsum") }
+  let(:model) { ExampleForm.new(name: "Fred Flintstone", description: "Lorem ipsum", favourite_drink: "0002") }
   let(:builder) { described_class.new(:example_form, model, template, {}) }
 
   let(:component_double) { instance_double(component, with_content: nil, render_in: nil) }
@@ -156,6 +156,37 @@ RSpec.describe CitizensAdviceFormBuilder::FormBuilder do
 
         expect(component).to have_received(:new).with(hash_including(options: hash_including(error_message: "Description is required")))
       end
+    end
+  end
+
+  describe "#cads_collection_radio_buttons" do
+    let(:component) { CitizensAdviceComponents::RadioGroup }
+    let(:component_double) { instance_double(component, with_inputs: nil, render_in: nil) }
+
+    let(:drink) { Struct.new(:reference, :colour, :drink) }
+
+    let(:collection) do
+      [
+        drink.new("0001", "Light Brown", "Tea"),
+        drink.new("0002", "Dark Brown", "Coffee"),
+        drink.new("9999", "Clear", "Water")
+      ]
+    end
+
+    it "passes the attribute name to the radio group component" do
+      builder.cads_collection_radio_buttons(:favourite_drink, collection, :reference, :drink)
+
+      expect(component).to have_received(:new).with(hash_including(name: "example_form_favourite_drink"))
+    end
+
+    it "passes the collection, reformatted with 'label', 'value' and 'checked' keys to the radio group component" do
+      builder.cads_collection_radio_buttons(:favourite_drink, collection, :reference, :drink)
+
+      expect(component_double).to have_received(:with_inputs).with([
+        { name: "example_form[favourite_drink]", label: "Tea", value: "0001", checked: false },
+        { name: "example_form[favourite_drink]", label: "Coffee", value: "0002", checked: true },
+        { name: "example_form[favourite_drink]", label: "Water", value: "9999", checked: false }
+      ])
     end
   end
 end
