@@ -8,6 +8,7 @@ require CitizensAdviceComponents::Engine.root.join("app", "components", "citizen
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "button")
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "input")
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "text_input")
+require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "textarea")
 
 module CitizensAdviceFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder
@@ -24,6 +25,31 @@ module CitizensAdviceFormBuilder
         name: id_for(attribute),
         label: label,
         type: :text,
+        options: {
+          hint: hint,
+          optional: optional,
+          value: object.send(attribute),
+          error_message: error_message_for(attribute),
+          additional_attributes: { name: name_for(attribute) }
+        }
+      )
+
+      component.render_in(@template)
+    end
+
+    def cads_text_area(attribute, label: nil, hint: nil, required: false, rows: nil)
+      label ||= object.class.human_attribute_name(attribute)
+
+      optional = if required
+                   false
+                 else
+                   true
+                 end
+
+      component = CitizensAdviceComponents::Textarea.new(
+        name: id_for(attribute),
+        label: label,
+        rows: rows,
         options: {
           hint: hint,
           optional: optional,
