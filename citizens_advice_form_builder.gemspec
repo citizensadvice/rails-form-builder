@@ -33,4 +33,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "actionview", ">= 7.0"
   spec.add_dependency "activemodel", ">= 7.0"
   spec.add_dependency "activesupport", ">= 7.0"
+
+  spec.add_dependency "citizens_advice_components"
 end
