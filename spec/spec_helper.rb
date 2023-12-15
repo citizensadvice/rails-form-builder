@@ -1,5 +1,11 @@
 # frozen_string_literal: true
 
+require "action_controller"
+require "action_view"
+require "active_model"
+require "active_support"
+require "nokogiri"
+
 require "citizens_advice_form_builder"
 
 RSpec.configure do |config|
