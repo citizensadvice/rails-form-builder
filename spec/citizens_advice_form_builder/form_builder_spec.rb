@@ -163,8 +163,7 @@ RSpec.describe CitizensAdviceFormBuilder::FormBuilder do
     let(:component) { CitizensAdviceComponents::RadioGroup }
     let(:component_double) { instance_double(component, with_inputs: nil, render_in: nil) }
 
-    let(:drink) { Struct.new(:reference, :colour, :drink) }
-
+    let(:drink) { Struct.new(:reference, :colour, :name) }
     let(:collection) do
       [
         drink.new("0001", "Light Brown", "Tea"),
@@ -174,19 +173,58 @@ RSpec.describe CitizensAdviceFormBuilder::FormBuilder do
     end
 
     it "passes the attribute name to the radio group component" do
-      builder.cads_collection_radio_buttons(:favourite_drink, collection, :reference, :drink)
+      builder.cads_collection_radio_buttons(:favourite_drink, collection, :reference, :name)
 
       expect(component).to have_received(:new).with(hash_including(name: "example_form_favourite_drink"))
     end
 
     it "passes the collection, reformatted with 'label', 'value' and 'checked' keys to the radio group component" do
-      builder.cads_collection_radio_buttons(:favourite_drink, collection, :reference, :drink)
+      builder.cads_collection_radio_buttons(:favourite_drink, collection, :reference, :name)
 
       expect(component_double).to have_received(:with_inputs).with([
         { name: "example_form[favourite_drink]", label: "Tea", value: "0001", checked: false },
         { name: "example_form[favourite_drink]", label: "Coffee", value: "0002", checked: true },
         { name: "example_form[favourite_drink]", label: "Water", value: "9999", checked: false }
       ])
+    end
+  end
+
+  describe "#cads_collection_select" do
+    let(:component) { CitizensAdviceComponents::Select }
+    let(:component_double) { instance_double(component, render_in: nil) }
+
+    let(:drink) { Struct.new(:reference, :colour, :name) }
+    let(:collection) do
+      [
+        drink.new("0001", "Light Brown", "Tea"),
+        drink.new("0002", "Dark Brown", "Coffee"),
+        drink.new("9999", "Clear", "Water")
+      ]
+    end
+
+    it "passes the attribute name to the select component" do
+      builder.cads_collection_select(:favourite_drink, collection, :reference, :name)
+
+      expect(component).to have_received(:new).with(hash_including(name: "example_form_favourite_drink"))
+    end
+
+    it "passes the collection, reformatted with 'select_options' and 'value' keys to the select component" do
+      builder.cads_collection_select(:favourite_drink, collection, :reference, :name)
+
+      expect(component).to have_received(:new).with(
+        hash_including(
+          select_options: [
+            %w[Tea 0001], %w[Coffee 0002], %w[Water 9999]
+          ],
+          value: "0002"
+        )
+      )
+    end
+
+    it "passes the optional legend to the select component" do
+      builder.cads_collection_select(:favourite_drink, collection, :reference, :name, legend: "Total legend!")
+
+      expect(component).to have_received(:new).with(hash_including(legend: "Total legend!"))
     end
   end
 end

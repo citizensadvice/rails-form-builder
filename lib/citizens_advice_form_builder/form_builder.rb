@@ -94,6 +94,29 @@ module CitizensAdviceFormBuilder
     # rubocop:enable Metrics/AbcSize
     # rubocop:enable Metrics/MethodLength
 
+    def cads_collection_select(attribute, collection, value_method, text_method = nil, legend: nil)
+      legend ||= object.class.human_attribute_name(attribute)
+      text_method ||= value_method
+      current_value = object.send(attribute)
+
+      select_options = collection.map do |item|
+        # From ActionView::FormOptionsHelper
+        label = value_for_collection(item, text_method)
+        value = value_for_collection(item, value_method)
+
+        [label, value]
+      end
+
+      component = CitizensAdviceComponents::Select.new(
+        name: id_for(attribute),
+        legend: legend,
+        select_options: select_options,
+        value: current_value
+      )
+
+      component.render_in(@template)
+    end
+
     def cads_button(value = "Save changes")
       component = CitizensAdviceComponents::Button.new(type: :submit, variant: :primary)
       component.with_content(value)
