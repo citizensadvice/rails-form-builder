@@ -1,12 +1,18 @@
 # frozen_string_literal: true
 
+ENV["RAILS_ENV"] = "test"
+
 require "action_controller"
 require "action_view"
 require "active_model"
 require "active_support"
-require "nokogiri"
+
+require "pry"
 
 require "citizens_advice_form_builder"
+
+require_relative "../spec/dummy/config/environment"
+ENV["RAILS_ROOT"] ||= "#{File.dirname(__FILE__)}../../../spec/dummy"
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure

@@ -8,6 +8,17 @@ GIT
       rubocop-rails (~> 2.17)
       rubocop-rspec (~> 2.18)
 
+GIT
+  remote: https://github.com/citizensadvice/design-system.git
+  revision: 486ba37eec0e0dedd459c9268ff04f7cffd0fb48
+  tag: v5.6.0
+  glob: engine/*.gemspec
+  specs:
+    citizens_advice_components (0.1.0)
+      actionpack (>= 6.0.0, < 8.0)
+      railties (>= 6.0.0, < 8.0)
+      view_component (>= 2.0.0, < 4.0)
+
 PATH
   remote: .
   specs:
@@ -16,6 +27,7 @@ PATH
       actionview (>= 7.0)
       activemodel (>= 7.0)
       activesupport (>= 7.0)
+      citizens_advice_components
 
 GEM
   remote: https://rubygems.org/
@@ -47,10 +59,21 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    addressable (2.8.6)
+      public_suffix (>= 2.0.2, < 6.0)
     ast (2.4.2)
     base64 (0.1.1)
     bigdecimal (3.1.4)
     builder (3.2.4)
+    capybara (3.39.2)
+      addressable
+      matrix
+      mini_mime (>= 0.1.3)
+      nokogiri (~> 1.8)
+      rack (>= 1.6.0)
+      rack-test (>= 0.6.3)
+      regexp_parser (>= 1.5, < 3.0)
+      xpath (~> 3.2)
     coderay (1.1.3)
     concurrent-ruby (1.2.2)
     connection_pool (2.4.1)
@@ -61,12 +84,18 @@ GEM
     erubi (1.12.0)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
+    io-console (0.6.0)
+    irb (1.9.1)
+      rdoc
+      reline (>= 0.3.8)
     json (2.6.3)
     language_server-protocol (3.17.0.3)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
+    matrix (0.4.2)
     method_source (1.0.0)
+    mini_mime (1.1.5)
     minitest (5.20.0)
     mutex_m (0.1.2)
     nokogiri (1.15.5-arm64-darwin)
@@ -80,12 +109,18 @@ GEM
     pry (0.14.2)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    psych (5.1.1.1)
+      stringio
+    public_suffix (5.0.4)
     racc (1.7.1)
     rack (3.0.8)
     rack-session (2.0.0)
       rack (>= 3.0.0)
     rack-test (2.1.0)
       rack (>= 1.3)
+    rackup (2.1.0)
+      rack (>= 3)
+      webrick (~> 1.8)
     rails-dom-testing (2.2.0)
       activesupport (>= 5.0.0)
       minitest
@@ -93,9 +128,21 @@ GEM
     rails-html-sanitizer (1.6.0)
       loofah (~> 2.21)
       nokogiri (~> 1.14)
+    railties (7.1.1)
+      actionpack (= 7.1.1)
+      activesupport (= 7.1.1)
+      irb
+      rackup (>= 1.0.0)
+      rake (>= 12.2)
+      thor (~> 1.0, >= 1.2.2)
+      zeitwerk (~> 2.6)
     rainbow (3.1.1)
     rake (13.0.6)
+    rdoc (6.6.0)
+      psych (>= 4.0.0)
     regexp_parser (2.8.2)
+    reline (0.4.1)
+      io-console (~> 0.5)
     rexml (3.2.6)
     rspec (3.12.0)
       rspec-core (~> 3.12.0)
@@ -109,6 +156,14 @@ GEM
     rspec-mocks (3.12.6)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.12.0)
+    rspec-rails (6.1.0)
+      actionpack (>= 6.1)
+      activesupport (>= 6.1)
+      railties (>= 6.1)
+      rspec-core (~> 3.12)
+      rspec-expectations (~> 3.12)
+      rspec-mocks (~> 3.12)
+      rspec-support (~> 3.12)
     rspec-support (3.12.1)
     rubocop (1.57.1)
       base64 (~> 0.1.1)
@@ -140,21 +195,33 @@ GEM
       rubocop-factory_bot (~> 2.22)
     ruby-progressbar (1.13.0)
     ruby2_keywords (0.0.5)
+    stringio (3.1.0)
+    thor (1.3.0)
     tzinfo (2.0.6)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.5.0)
+    view_component (3.8.0)
+      activesupport (>= 5.2.0, < 8.0)
+      concurrent-ruby (~> 1.0)
+      method_source (~> 1.0)
+    webrick (1.8.1)
+    xpath (3.2.0)
+      nokogiri (~> 1.8)
+    zeitwerk (2.6.12)
 
 PLATFORMS
   arm64-darwin-23
   x86_64-linux
 
 DEPENDENCIES
+  capybara
   citizens-advice-style!
+  citizens_advice_components!
   citizens_advice_form_builder!
-  nokogiri
   pry
   rake (~> 13.0)
   rspec (~> 3.0)
+  rspec-rails
   rubocop-rake
 
 BUNDLED WITH
