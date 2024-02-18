@@ -90,6 +90,8 @@ GEM
       reline (>= 0.3.8)
     json (2.6.3)
     language_server-protocol (3.17.0.3)
+    launchy (2.5.2)
+      addressable (~> 2.8)
     loofah (2.22.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.12.0)
@@ -218,6 +220,7 @@ DEPENDENCIES
   citizens-advice-style!
   citizens_advice_components!
   citizens_advice_form_builder!
+  launchy
   pry
   rake (~> 13.0)
   rspec (~> 3.0)
