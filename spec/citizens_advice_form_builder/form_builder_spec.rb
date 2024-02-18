@@ -20,23 +20,6 @@ RSpec.describe CitizensAdviceFormBuilder::FormBuilder do
 
   before { allow(component).to receive(:new).and_return(component_double) }
 
-  describe "#cads_button" do
-    let(:component) { CitizensAdviceComponents::Button }
-
-    it "calls the button component with default parameters" do
-      builder.cads_button
-
-      expect(component).to have_received(:new).with(type: :submit, variant: :primary)
-      expect(component_double).to have_received(:with_content).with("Save changes")
-    end
-
-    it "calls the button component with a custom label text" do
-      builder.cads_button "Next"
-
-      expect(component_double).to have_received(:with_content).with("Next")
-    end
-  end
-
   describe "#cads_text_field" do
     let(:component) { CitizensAdviceComponents::TextInput }
 
