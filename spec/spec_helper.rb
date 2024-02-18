@@ -14,6 +14,8 @@ require "citizens_advice_form_builder"
 require_relative "../spec/dummy/config/environment"
 ENV["RAILS_ROOT"] ||= "#{File.dirname(__FILE__)}../../../spec/dummy"
 
+Dir[File.join("./spec", "support", "**", "*.rb")].each { |file| require file }
+
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = ".rspec_status"
