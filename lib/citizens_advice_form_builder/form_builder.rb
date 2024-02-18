@@ -13,15 +13,12 @@ require CitizensAdviceComponents::Engine.root.join("app", "components", "citizen
 
 module CitizensAdviceFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder
-    def cads_text_field(attribute, label: nil, hint: nil, required: false)
-      Elements::TextInput.new(@template, object, attribute, label: label, required: required, hint: hint).render
+    def cads_text_field(attribute, label: nil, hint: nil, required: false, **kwargs)
+      Elements::TextInput.new(@template, object, attribute, label: label, required: required, hint: hint, **kwargs).render
     end
 
-    def cads_button(value = "Save changes")
-      component = CitizensAdviceComponents::Button.new(type: :submit, variant: :primary)
-      component.with_content(value)
-
-      component.render_in(@template)
+    def cads_button(button_text = "Save changes", **kwargs)
+      Elements::Button.new(@template, object, button_text: button_text, **kwargs).render
     end
   end
 end
