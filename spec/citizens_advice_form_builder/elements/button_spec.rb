@@ -4,6 +4,7 @@ RSpec.describe CitizensAdviceFormBuilder::Elements::Button do
   include_context "with view component"
 
   let(:component) { CitizensAdviceComponents::Button }
+  let(:model) { nil } # Buttons don't use model
 
   describe "#render" do
     it "calls the button component with default parameters" do
