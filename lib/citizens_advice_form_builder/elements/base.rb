@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require "active_support/core_ext/module/delegation"
+
 module CitizensAdviceFormBuilder
   module Elements
     class Base
+      delegate :content_tag, :tag, :safe_join, :link_to, :capture, to: :@template
+
       attr_reader :template, :object, :attribute, :options
 
       def initialize(template, object, attribute, **kwargs)

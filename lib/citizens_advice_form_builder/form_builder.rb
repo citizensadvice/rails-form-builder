@@ -22,6 +22,10 @@ module CitizensAdviceFormBuilder
       Elements::TextArea.new(@template, object, attribute, label: label, required: required, hint: hint, **kwargs).render
     end
 
+    def cads_date_field(attribute, label: nil, hint: nil, required: false, **kwargs)
+      Elements::DateInput.new(@template, object, attribute, label: label, required: required, hint: hint, **kwargs).render
+    end
+
     def cads_button(button_text = "Save changes", **kwargs)
       Elements::Button.new(@template, object, button_text: button_text, **kwargs).render
     end
