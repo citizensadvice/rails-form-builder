@@ -7,7 +7,7 @@ class Person
   include ActiveModel::Attributes
   include ActiveRecord::AttributeAssignment
 
-  attr_accessor :first_name, :last_name, :address, :date_with_hint
+  attr_accessor :first_name, :last_name, :address, :date_with_hint, :required_date
 
   attribute :date_of_birth, :date
 

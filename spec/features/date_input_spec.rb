@@ -15,6 +15,12 @@ RSpec.describe "date inputs" do
       end
     end
 
+    it "indicates the fields are optional" do
+      within "#default_date_input" do
+        expect(page).to have_css(".cads-form-field__optional", text: "(optional)")
+      end
+    end
+
     it "renders the 'month' input field" do
       within "#default_date_input" do
         expect(page).to have_css("label[for=person_date_of_birth_2i]", text: "Month")
@@ -57,4 +63,12 @@ RSpec.describe "date inputs" do
     expect(page).to have_field("person_date_of_birth_1i", with: "2005")
   end
   # rubocop:enable RSpec/ExampleLength
+
+  context "with a required field" do
+    it "doesn't add the 'optional' label text" do
+      within "#required_date_input" do
+        expect(page).not_to have_css(".cads-form-field__optional")
+      end
+    end
+  end
 end

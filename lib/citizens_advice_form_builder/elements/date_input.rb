@@ -16,7 +16,7 @@ module CitizensAdviceFormBuilder
       private
 
       def legend_html
-        tag.legend(class: "cads-form-field__label") { label + optional_html }
+        tag.legend(class: "cads-form-field__label") { safe_join([label, optional_html]) }
       end
 
       def hint_html
