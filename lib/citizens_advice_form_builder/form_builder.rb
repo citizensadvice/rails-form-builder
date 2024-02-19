@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative "elements"
+
 require "action_view"
 require "citizens_advice_components"
 
@@ -11,50 +13,12 @@ require CitizensAdviceComponents::Engine.root.join("app", "components", "citizen
 
 module CitizensAdviceFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder
-    def cads_text_field(attribute, label: nil, hint: nil, required: false)
-      label ||= object.class.human_attribute_name(attribute)
-
-      optional = if required
-                   false
-                 else
-                   true
-                 end
-
-      component = CitizensAdviceComponents::TextInput.new(
-        name: id_for(attribute),
-        label: label,
-        type: :text,
-        options: {
-          hint: hint,
-          optional: optional,
-          value: object.send(attribute),
-          error_message: error_message_for(attribute),
-          additional_attributes: { name: name_for(attribute) }
-        }
-      )
-
-      component.render_in(@template)
+    def cads_text_field(attribute, label: nil, hint: nil, required: false, **kwargs)
+      Elements::TextInput.new(@template, object, attribute, label: label, required: required, hint: hint, **kwargs).render
     end
 
-    def cads_button(value = "Save changes")
-      component = CitizensAdviceComponents::Button.new(type: :submit, variant: :primary)
-      component.with_content(value)
-
-      component.render_in(@template)
-    end
-
-    private
-
-    def id_for(attribute)
-      @template.field_id(object_name, attribute)
-    end
-
-    def name_for(attribute)
-      @template.field_name(object_name, attribute)
-    end
-
-    def error_message_for(attribute)
-      object.errors[attribute].first
+    def cads_button(button_text = "Save changes", **kwargs)
+      Elements::Button.new(@template, object, button_text: button_text, **kwargs).render
     end
   end
 end

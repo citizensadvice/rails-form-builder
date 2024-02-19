@@ -8,38 +8,13 @@ class ExampleForm
   validates :required_field, presence: true
 end
 
-RSpec.describe CitizensAdviceFormBuilder::FormBuilder do
-  let(:controller) { ActionController::Base.new }
-  let(:lookup_context) { ActionView::LookupContext.new(nil) }
-  let(:template) { ActionView::Base.new(lookup_context, {}, controller) }
+RSpec.describe CitizensAdviceFormBuilder::Elements::TextInput do
+  include_context "with view component"
 
+  let(:component) { CitizensAdviceComponents::TextInput }
   let(:model) { ExampleForm.new(name: "Fred Flintstone") }
-  let(:builder) { described_class.new(:example_form, model, template, {}) }
 
-  let(:component_double) { instance_double(component, with_content: nil, render_in: nil) }
-
-  before { allow(component).to receive(:new).and_return(component_double) }
-
-  describe "#cads_button" do
-    let(:component) { CitizensAdviceComponents::Button }
-
-    it "calls the button component with default parameters" do
-      builder.cads_button
-
-      expect(component).to have_received(:new).with(type: :submit, variant: :primary)
-      expect(component_double).to have_received(:with_content).with("Save changes")
-    end
-
-    it "calls the button component with a custom label text" do
-      builder.cads_button "Next"
-
-      expect(component_double).to have_received(:with_content).with("Next")
-    end
-  end
-
-  describe "#cads_text_field" do
-    let(:component) { CitizensAdviceComponents::TextInput }
-
+  describe "#render" do
     it "passes the attribute name to the text input component" do
       builder.cads_text_field(:name)
 
