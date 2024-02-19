@@ -41,4 +41,20 @@ RSpec.describe "date inputs" do
       expect(page).to have_css("p.cads-form-field__hint", text: "Hint text")
     end
   end
+
+  # rubocop:disable RSpec/ExampleLength
+  it "stores and retrieves the day, month and year values in a Rails-compatible way" do
+    within "#default_date_input" do
+      fill_in "person_date_of_birth_3i", with: 13
+      fill_in "person_date_of_birth_2i", with: 12
+      fill_in "person_date_of_birth_1i", with: 2005
+    end
+
+    click_button
+
+    expect(page).to have_field("person_date_of_birth_3i", with: "13")
+    expect(page).to have_field("person_date_of_birth_2i", with: "12")
+    expect(page).to have_field("person_date_of_birth_1i", with: "2005")
+  end
+  # rubocop:enable RSpec/ExampleLength
 end

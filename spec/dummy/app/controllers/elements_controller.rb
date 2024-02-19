@@ -6,4 +6,17 @@ class ElementsController < ApplicationController
 
     render params[:element]
   end
+
+  def create
+    @person = Person.new(person_params)
+    @person.valid?
+
+    render params[:element]
+  end
+
+  private
+
+  def person_params
+    params.require(:person).permit(:date_of_birth)
+  end
 end

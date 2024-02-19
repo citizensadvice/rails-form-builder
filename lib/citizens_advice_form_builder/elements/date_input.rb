@@ -35,7 +35,13 @@ module CitizensAdviceFormBuilder
         tag.div(class: "cads-date-input") do
           tag.div(class: "cads-date-input__item") do
             tag.label(class: "cads-form-field__label", for: date_field_id("3i")) { "Day" } +
-              tag.input(class: "cads-input cads-input--2ch", name: date_field_name("3i"), id: date_field_id("3i"), inputmode: "numeric")
+              tag.input(
+                class: "cads-input cads-input--2ch",
+                name: date_field_name("3i"),
+                id: date_field_id("3i"),
+                inputmode: "numeric",
+                value: day_value
+              )
           end
         end
       end
@@ -44,7 +50,13 @@ module CitizensAdviceFormBuilder
         tag.div(class: "cads-date-input") do
           tag.div(class: "cads-date-input__item") do
             tag.label(class: "cads-form-field__label", for: date_field_id("2i")) { "Month" } +
-              tag.input(class: "cads-input cads-input--2ch", name: date_field_name("2i"), id: date_field_id("2i"), inputmode: "numeric")
+              tag.input(
+                class: "cads-input cads-input--2ch",
+                name: date_field_name("2i"),
+                id: date_field_id("2i"),
+                inputmode: "numeric",
+                value: month_value
+              )
           end
         end
       end
@@ -53,7 +65,13 @@ module CitizensAdviceFormBuilder
         tag.div(class: "cads-date-input") do
           tag.div(class: "cads-date-input__item") do
             tag.label(class: "cads-form-field__label", for: date_field_id("1i")) { "Year" } +
-              tag.input(class: "cads-input cads-input--4ch", name: date_field_name("1i"), id: date_field_id("1i"), inputmode: "numeric")
+              tag.input(
+                class: "cads-input cads-input--4ch",
+                name: date_field_name("1i"),
+                id: date_field_id("1i"),
+                inputmode: "numeric",
+                value: year_value
+              )
           end
         end
       end
@@ -64,6 +82,18 @@ module CitizensAdviceFormBuilder
 
       def date_field_id(suffix)
         "#{field_id}_#{suffix}"
+      end
+
+      def day_value
+        current_value.day if current_value.is_a?(Date)
+      end
+
+      def month_value
+        current_value.month if current_value.is_a?(Date)
+      end
+
+      def year_value
+        current_value.year if current_value.is_a?(Date)
       end
     end
   end
