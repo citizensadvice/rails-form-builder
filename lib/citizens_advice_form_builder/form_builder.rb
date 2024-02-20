@@ -10,11 +10,16 @@ require CitizensAdviceComponents::Engine.root.join("app", "components", "citizen
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "button")
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "input")
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "text_input")
+require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "textarea")
 
 module CitizensAdviceFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder
     def cads_text_field(attribute, label: nil, hint: nil, required: false, **kwargs)
       Elements::TextInput.new(@template, object, attribute, label: label, required: required, hint: hint, **kwargs).render
+    end
+
+    def cads_text_area(attribute, label: nil, hint: nil, required: false, **kwargs)
+      Elements::TextArea.new(@template, object, attribute, label: label, required: required, hint: hint, **kwargs).render
     end
 
     def cads_button(button_text = "Save changes", **kwargs)
