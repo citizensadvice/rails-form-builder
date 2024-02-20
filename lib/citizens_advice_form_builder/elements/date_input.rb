@@ -7,7 +7,7 @@ module CitizensAdviceFormBuilder
         tag.div(class: "cads-form-field") do
           tag.div(class: "cads-form-field__content") do
             tag.fieldset(class: "cads-form-group") do
-              safe_join([legend_html, hint_html, day_input, month_input, year_input])
+              safe_join([legend_html, hint_html, date_inputs])
             end
           end
         end
@@ -29,6 +29,12 @@ module CitizensAdviceFormBuilder
         return unless optional
 
         tag.span(class: "cads-form-field__optional") { "(optional)" }
+      end
+
+      def date_inputs
+        tag.div(class: "cads-date-input") do
+          safe_join([day_input, month_input, year_input])
+        end
       end
 
       def day_input
