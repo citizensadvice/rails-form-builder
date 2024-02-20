@@ -11,6 +11,10 @@ require CitizensAdviceComponents::Engine.root.join("app", "components", "citizen
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "input")
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "text_input")
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "textarea")
+require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "form_group")
+require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "checkable", "base")
+require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "checkable", "radio")
+require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "radio_group")
 
 module CitizensAdviceFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder
@@ -24,6 +28,10 @@ module CitizensAdviceFormBuilder
 
     def cads_date_field(attribute, label: nil, hint: nil, required: false, **kwargs)
       Elements::DateInput.new(@template, object, attribute, label: label, required: required, hint: hint, **kwargs).render
+    end
+
+    def cads_collection_radio_buttons(attribute, label: nil, hint: nil, required: false, **kwargs)
+      Elements::Collections::RadioButtons.new(@template, object, attribute, label: label, hint: hint, required: required, **kwargs).render
     end
 
     def cads_button(button_text = "Save changes", **kwargs)
