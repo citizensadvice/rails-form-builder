@@ -16,7 +16,7 @@ RSpec.describe CitizensAdviceFormBuilder::Elements::TextArea do
     it "passes the attribute name to the component" do
       builder.cads_text_area(:address)
 
-      expect(component).to have_received(:new).with(hash_including(name: "example_form_address"))
+      expect(component).to have_received(:new).with(hash_including(name: "example_form[address]"))
     end
 
     it "passes the existing value to the component" do

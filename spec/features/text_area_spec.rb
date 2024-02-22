@@ -7,9 +7,12 @@ RSpec.describe "text areas" do
     visit element_path("text_areas")
   end
 
-  it "renders a default text area" do
+  it "renders a default text area, with 'name' and 'id' set correctly" do
     within "#default_text_area" do
-      expect(page).to have_css("textarea")
+      textarea = page.first("textarea")
+
+      expect(textarea["name"]).to eql "person[address]"
+      expect(textarea["id"]).to eql "person_address-input"
     end
   end
 

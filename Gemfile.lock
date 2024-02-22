@@ -10,8 +10,8 @@ GIT
 
 GIT
   remote: https://github.com/citizensadvice/design-system.git
-  revision: 486ba37eec0e0dedd459c9268ff04f7cffd0fb48
-  tag: v5.6.0
+  revision: 3900c39064b82f3e59d0b38c72f707bf1a21e0bf
+  tag: v5.7.0
   glob: engine/*.gemspec
   specs:
     citizens_advice_components (0.1.0)
@@ -22,7 +22,7 @@ GIT
 PATH
   remote: .
   specs:
-    citizens_advice_form_builder (0.1.0)
+    citizens_advice_form_builder (0.1.1)
       actionpack (>= 7.0)
       actionview (>= 7.0)
       activemodel (>= 7.0)

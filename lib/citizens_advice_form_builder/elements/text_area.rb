@@ -5,7 +5,8 @@ module CitizensAdviceFormBuilder
     class TextArea < Base
       def render
         component = CitizensAdviceComponents::Textarea.new(
-          name: field_id,
+          name: field_name,
+          id: field_id,
           label: label,
           rows: options[:rows],
           options: {

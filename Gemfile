@@ -11,7 +11,7 @@ gem "citizens-advice-style", github: "citizensadvice/citizens-advice-style-ruby"
 
 gem "citizens_advice_components",
     github: "citizensadvice/design-system",
-    tag: "v5.6.0",
+    tag: "v5.7.0",
     glob: "engine/*.gemspec"
 
 gem "launchy"
