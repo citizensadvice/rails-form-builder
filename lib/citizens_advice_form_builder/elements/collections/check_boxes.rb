@@ -8,7 +8,7 @@ module CitizensAdviceFormBuilder
 
         def render
           tag.div(class: "cads-form-field") do
-            tag.fieldset(class: "cads-form-group") do
+            tag.fieldset(class: "cads-form-field__content cads-form-group cads-form-group--checkbox") do
               safe_join([legend_html, hint_html, checkboxes_html])
             end
           end
