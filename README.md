@@ -18,4 +18,7 @@ This gem provides a custom Rails form builder which provides a Rails-like
 interface for generating forms using the Citizens Advice design system component
 library.
 
-TODO: Add full usage instructions
+## Release process
+
+Instructions can be found in [RELEASE.md](RELEASE.md).
+
