@@ -34,6 +34,10 @@ module CitizensAdviceFormBuilder
       Elements::Collections::RadioButtons.new(@template, object, attribute, label: label, hint: hint, required: required, **kwargs).render
     end
 
+    def cads_collection_check_boxes(attribute, label: nil, hint: nil, required: false, **kwargs)
+      Elements::Collections::CheckBoxes.new(@template, object, attribute, label: label, hint: hint, required: required, **kwargs).render
+    end
+
     def cads_button(button_text = "Save changes", **kwargs)
       Elements::Button.new(@template, object, button_text: button_text, **kwargs).render
     end

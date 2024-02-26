@@ -22,7 +22,7 @@ GIT
 PATH
   remote: .
   specs:
-    citizens_advice_form_builder (0.1.1)
+    citizens_advice_form_builder (0.1.2)
       actionpack (>= 7.0)
       actionview (>= 7.0)
       activemodel (>= 7.0)

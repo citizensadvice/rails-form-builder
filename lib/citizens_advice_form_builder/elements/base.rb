@@ -5,6 +5,8 @@ require "active_support/core_ext/module/delegation"
 module CitizensAdviceFormBuilder
   module Elements
     class Base
+      include ActionView::Context
+
       delegate :content_tag, :tag, :safe_join, :link_to, :capture, to: :@template
 
       attr_reader :template, :object, :attribute, :options

@@ -17,6 +17,6 @@ class ElementsController < ApplicationController
   private
 
   def person_params
-    params.require(:person).permit(:date_of_birth)
+    params.require(:person).permit!
   end
 end

@@ -7,3 +7,4 @@ require_relative "elements/text_area"
 require_relative "elements/date_input"
 
 require_relative "elements/collections/radio_buttons"
+require_relative "elements/collections/check_boxes"
