@@ -71,4 +71,24 @@ RSpec.describe "date inputs" do
       end
     end
   end
+
+  context "with a validation error" do
+    # rubocop:disable RSpec/ExampleLength
+    it "renders the error message" do
+      within "#default_date_input" do
+        fill_in "person[date_of_birth(3i)]", with: 25
+        fill_in "person[date_of_birth(2i)]", with: 12
+        fill_in "person[date_of_birth(1i)]", with: 3000
+      end
+
+      click_button
+
+      within "#default_date_input" do
+        expect(page).to have_css("div.cads-form-field.cads-form-field--has-error")
+        expect(page).to have_css("div.cads-form-field__error-marker")
+        expect(page).to have_css("p.cads-form-field__error-message")
+      end
+    end
+    # rubocop:enable RSpec/ExampleLength
+  end
 end
