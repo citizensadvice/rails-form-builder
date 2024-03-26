@@ -3,13 +3,18 @@
 module CitizensAdviceFormBuilder
   module Elements
     class DateInput < Base
+      include ActionView::Helpers::TagHelper
+
       def render
-        tag.div(class: "cads-form-field") do
-          tag.div(class: "cads-form-field__content") do
-            tag.fieldset(class: "cads-form-group") do
-              safe_join([legend_html, hint_html, date_inputs])
+        tag.div(class: form_field_classes) do
+          safe_join([
+            error_marker,
+            tag.div(class: "cads-form-field__content") do
+              tag.fieldset(class: "cads-form-group") do
+                safe_join([legend_html, hint_html, error_message_html, date_inputs])
+              end
             end
-          end
+          ])
         end
       end
 
@@ -23,6 +28,12 @@ module CitizensAdviceFormBuilder
         return if hint.nil?
 
         tag.p(class: "cads-form-field__hint") { hint }
+      end
+
+      def error_message_html
+        return unless error_message.present?
+
+        tag.p(class: "cads-form-field__error-message") { error_message }
       end
 
       def optional_html
@@ -100,6 +111,16 @@ module CitizensAdviceFormBuilder
 
       def year_value
         current_value.year if current_value.is_a?(Date)
+      end
+
+      def error_marker
+        return "" unless error_message.present?
+
+        tag.div(class: "cads-form-field__error-marker")
+      end
+
+      def form_field_classes
+        class_names("cads-form-field", "cads-form-field--has-error": error_message.present?)
       end
     end
   end
