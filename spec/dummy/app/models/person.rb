@@ -13,4 +13,5 @@ class Person
   attribute :pizza_toppings, array: true
 
   validates :first_name, presence: true
+  validates :date_of_birth, comparison: { less_than: Time.zone.today }
 end
