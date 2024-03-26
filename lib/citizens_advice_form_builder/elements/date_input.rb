@@ -38,48 +38,48 @@ module CitizensAdviceFormBuilder
       end
 
       def day_input
-        tag.div(class: "cads-date-input") do
-          tag.div(class: "cads-date-input__item") do
-            tag.label(class: "cads-form-field__label", for: date_field_id("3i")) { "Day" } +
-              tag.input(
-                class: "cads-input cads-input--2ch",
-                name: date_field_name("3i"),
-                id: date_field_id("3i"),
-                inputmode: "numeric",
-                value: day_value
-              )
-          end
-        end
+        component = CitizensAdviceComponents::TextInput.new(
+          name: date_field_id("3i"),
+          label: "Day",
+          type: :number,
+          width: :two_chars,
+          options: {
+            value: day_value,
+            additional_attributes: { name: date_field_name("3i") }
+          }
+        )
+
+        component.render_in(@template)
       end
 
       def month_input
-        tag.div(class: "cads-date-input") do
-          tag.div(class: "cads-date-input__item") do
-            tag.label(class: "cads-form-field__label", for: date_field_id("2i")) { "Month" } +
-              tag.input(
-                class: "cads-input cads-input--2ch",
-                name: date_field_name("2i"),
-                id: date_field_id("2i"),
-                inputmode: "numeric",
-                value: month_value
-              )
-          end
-        end
+        component = CitizensAdviceComponents::TextInput.new(
+          name: date_field_id("2i"),
+          label: "Month",
+          type: :number,
+          width: :two_chars,
+          options: {
+            value: month_value,
+            additional_attributes: { name: date_field_name("2i") }
+          }
+        )
+
+        component.render_in(@template)
       end
 
       def year_input
-        tag.div(class: "cads-date-input") do
-          tag.div(class: "cads-date-input__item") do
-            tag.label(class: "cads-form-field__label", for: date_field_id("1i")) { "Year" } +
-              tag.input(
-                class: "cads-input cads-input--4ch",
-                name: date_field_name("1i"),
-                id: date_field_id("1i"),
-                inputmode: "numeric",
-                value: year_value
-              )
-          end
-        end
+        component = CitizensAdviceComponents::TextInput.new(
+          name: date_field_id("1i"),
+          label: "Year",
+          type: :number,
+          width: :four_chars,
+          options: {
+            value: year_value,
+            additional_attributes: { name: date_field_name("1i") }
+          }
+        )
+
+        component.render_in(@template)
       end
 
       def date_field_name(suffix)
