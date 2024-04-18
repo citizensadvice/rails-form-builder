@@ -11,27 +11,27 @@ RSpec.describe "date inputs" do
     it "renders the 'day' input field" do
       within "#default_date_input" do
         expect(page).to have_css("label[for=person_date_of_birth_3i]", text: "Day")
-        expect(page).to have_field("person_date_of_birth_3i", name: "person[date_of_birth(3i)]")
-      end
-    end
-
-    it "indicates the fields are optional" do
-      within "#default_date_input" do
-        expect(page).to have_css(".cads-form-field__optional", text: "(optional)")
+        expect(page).to have_field("person[date_of_birth(3i)]")
       end
     end
 
     it "renders the 'month' input field" do
       within "#default_date_input" do
         expect(page).to have_css("label[for=person_date_of_birth_2i]", text: "Month")
-        expect(page).to have_field("person_date_of_birth_2i", name: "person[date_of_birth(2i)]")
+        expect(page).to have_field("person[date_of_birth(2i)]")
       end
     end
 
     it "renders the 'year' input field" do
       within "#default_date_input" do
         expect(page).to have_css("label[for=person_date_of_birth_1i]", text: "Year")
-        expect(page).to have_field("person_date_of_birth_1i", name: "person[date_of_birth(1i)]")
+        expect(page).to have_field("person[date_of_birth(1i)]")
+      end
+    end
+
+    it "indicates the fields are optional" do
+      within "#default_date_input" do
+        expect(page).to have_css(".cads-form-field__optional", text: "(optional)")
       end
     end
 
@@ -51,16 +51,16 @@ RSpec.describe "date inputs" do
   # rubocop:disable RSpec/ExampleLength
   it "stores and retrieves the day, month and year values in a Rails-compatible way" do
     within "#default_date_input" do
-      fill_in "person_date_of_birth_3i", with: 13
-      fill_in "person_date_of_birth_2i", with: 12
-      fill_in "person_date_of_birth_1i", with: 2005
+      fill_in "person[date_of_birth(3i)]", with: 13
+      fill_in "person[date_of_birth(2i)]", with: 12
+      fill_in "person[date_of_birth(1i)]", with: 2005
     end
 
     click_button
 
-    expect(page).to have_field("person_date_of_birth_3i", with: "13")
-    expect(page).to have_field("person_date_of_birth_2i", with: "12")
-    expect(page).to have_field("person_date_of_birth_1i", with: "2005")
+    expect(page).to have_field("person[date_of_birth(3i)]", with: "13")
+    expect(page).to have_field("person[date_of_birth(2i)]", with: "12")
+    expect(page).to have_field("person[date_of_birth(1i)]", with: "2005")
   end
   # rubocop:enable RSpec/ExampleLength
 
@@ -70,5 +70,29 @@ RSpec.describe "date inputs" do
         expect(page).not_to have_css(".cads-form-field__optional")
       end
     end
+  end
+
+  context "with a validation error" do
+    # rubocop:disable RSpec/ExampleLength
+    it "renders the error message" do
+      within "#default_date_input" do
+        fill_in "person[date_of_birth(3i)]", with: 25
+        fill_in "person[date_of_birth(2i)]", with: 12
+        fill_in "person[date_of_birth(1i)]", with: 3000
+      end
+
+      click_button
+
+      within "#default_date_input" do
+        expect(page).to have_css("div.cads-form-field.cads-form-field--has-error")
+        expect(page).to have_css("div.cads-form-field__error-marker")
+        expect(page).to have_css("p.cads-form-field__error-message")
+
+        expect(page).to have_css("#person_date_of_birth_3i.cads-input--error")
+        expect(page).to have_css("#person_date_of_birth_2i.cads-input--error")
+        expect(page).to have_css("#person_date_of_birth_1i.cads-input--error")
+      end
+    end
+    # rubocop:enable RSpec/ExampleLength
   end
 end
