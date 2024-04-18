@@ -31,7 +31,7 @@ module CitizensAdviceFormBuilder
       end
 
       def error_message_html
-        return unless error_message.present?
+        return unless error?
 
         tag.p(class: "cads-form-field__error-message") { error_message }
       end
@@ -53,7 +53,7 @@ module CitizensAdviceFormBuilder
           tag.div(class: "cads-date-input__item") do
             tag.label(class: "cads-form-field__label", for: date_field_id("3i")) { "Day" } +
               tag.input(
-                class: "cads-input cads-input--2ch",
+                class: class_names("cads-input", "cads-input--2ch", "cads-input--error": error?),
                 name: date_field_name("3i"),
                 id: date_field_id("3i"),
                 inputmode: "numeric",
@@ -68,7 +68,7 @@ module CitizensAdviceFormBuilder
           tag.div(class: "cads-date-input__item") do
             tag.label(class: "cads-form-field__label", for: date_field_id("2i")) { "Month" } +
               tag.input(
-                class: "cads-input cads-input--2ch",
+                class: class_names("cads-input", "cads-input--2ch", "cads-input--error": error?),
                 name: date_field_name("2i"),
                 id: date_field_id("2i"),
                 inputmode: "numeric",
@@ -83,7 +83,7 @@ module CitizensAdviceFormBuilder
           tag.div(class: "cads-date-input__item") do
             tag.label(class: "cads-form-field__label", for: date_field_id("1i")) { "Year" } +
               tag.input(
-                class: "cads-input cads-input--4ch",
+                class: class_names("cads-input", "cads-input--4ch", "cads-input--error": error?),
                 name: date_field_name("1i"),
                 id: date_field_id("1i"),
                 inputmode: "numeric",
@@ -114,13 +114,17 @@ module CitizensAdviceFormBuilder
       end
 
       def error_marker
-        return "" unless error_message.present?
+        return "" unless error?
 
         tag.div(class: "cads-form-field__error-marker")
       end
 
       def form_field_classes
-        class_names("cads-form-field", "cads-form-field--has-error": error_message.present?)
+        class_names("cads-form-field", "cads-form-field--has-error": error?)
+      end
+
+      def error?
+        error_message.present?
       end
     end
   end
