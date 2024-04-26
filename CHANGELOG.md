@@ -1,3 +1,7 @@
+## [0.1.4] - 2024-04-26
+
+- Add error handling to `cads_date_field`
+
 ## [0.1.3] - 2024-03-04
 
 - Add `cads_collection_select` method
