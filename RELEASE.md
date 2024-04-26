@@ -10,8 +10,8 @@ Enter `gem install gem-release` to install on your local machine.
 
 ## Release Process
 
+- Use `gem bump -v patch` to bump the patch release number of the gem
 - Update `CHANGELOG.md` with any changes going into this release
-- Use `gem bump -v minor` to bump the minor release number of the gem
 - Use `gem tag` to create a git tag for the new version
 - Push the tag up to the git remote with `git push origin --tags`
 - Open a PR and get it merged into main
