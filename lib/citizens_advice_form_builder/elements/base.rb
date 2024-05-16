@@ -9,7 +9,8 @@ module CitizensAdviceFormBuilder
 
       delegate :content_tag, :tag, :safe_join, :link_to, :capture, to: :@template
 
-      attr_reader :template, :object, :attribute, :options
+      attr_reader :template, :object, :attribute
+      attr_accessor :options
 
       def initialize(template, object, attribute, **kwargs)
         @template = template

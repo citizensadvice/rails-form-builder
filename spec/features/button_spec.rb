@@ -18,4 +18,20 @@ RSpec.describe "buttons" do
   it "renders a button with type button" do
     expect(page).to have_css(".cads-button__primary[type=button]", text: "Button")
   end
+
+  context "with icons" do
+    it "renders icon on the left side of button" do
+      within "#icon_left" do
+        expect(page).to have_css("span.cads-button__icon-left")
+        expect(page).to have_css("svg.cads-icon--arrow-left")
+      end
+    end
+
+    it "renders icon on the right side of button" do
+      within "#icon_right" do
+        expect(page).to have_css("span.cads-button__icon-right")
+        expect(page).to have_css("svg.cads-icon--arrow-right")
+      end
+    end
+  end
 end
