@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = "Citizens Advice custom Rails form builder"
   spec.homepage = "https://github.com/citizensadvice/rails-form-builder"
-  spec.required_ruby_version = ">= 3.0.0"
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.1")
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
