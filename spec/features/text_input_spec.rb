@@ -15,4 +15,12 @@ RSpec.describe "text inputs" do
       expect(input["id"]).to eql "person_first_name-input"
     end
   end
+
+  describe "width attributes" do
+    it "renders the associated width input" do
+      within "#text_field_with_width" do
+        expect(page).to have_css ".cads-input--four-chars"
+      end
+    end
+  end
 end

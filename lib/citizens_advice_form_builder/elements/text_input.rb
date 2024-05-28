@@ -8,6 +8,7 @@ module CitizensAdviceFormBuilder
           name: field_id,
           label: label,
           type: :text,
+          width: options[:width],
           options: {
             hint: hint,
             optional: optional,
