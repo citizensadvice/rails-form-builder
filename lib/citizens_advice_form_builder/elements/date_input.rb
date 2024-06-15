@@ -55,7 +55,7 @@ module CitizensAdviceFormBuilder
               tag.input(
                 class: class_names("cads-input", "cads-input--2ch", "cads-input--error": error?),
                 name: date_field_name("3i"),
-                id: date_field_id("3i"),
+                id: "#{field_id}-input",
                 inputmode: "numeric",
                 value: day_value
               )

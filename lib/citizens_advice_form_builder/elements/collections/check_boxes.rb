@@ -7,10 +7,13 @@ module CitizensAdviceFormBuilder
         include ActionView::Helpers::FormOptionsHelper
 
         def render
-          tag.div(class: "cads-form-field") do
-            tag.fieldset(class: "cads-form-field__content cads-form-group cads-form-group--checkbox") do
-              safe_join([legend_html, hint_html, checkboxes_html])
-            end
+          tag.div(class: form_field_classes) do
+            safe_join([
+              error_marker,
+              tag.fieldset(class: "cads-form-field__content cads-form-group cads-form-group--checkbox") do
+                safe_join([legend_html, hint_html, error_message_html, checkboxes_html])
+              end
+            ])
           end
         end
 
@@ -49,6 +52,12 @@ module CitizensAdviceFormBuilder
           tag.p(class: "cads-form-field__hint") { hint }
         end
 
+        def error_message_html
+          return unless error?
+
+          tag.p(class: "cads-form-field__error-message") { error_message }
+        end
+
         def optional_html
           return unless optional
 
@@ -62,7 +71,7 @@ module CitizensAdviceFormBuilder
               tag.input(
                 class: "cads-form-group__input",
                 type: "checkbox",
-                id: "#{field_id}-#{index}",
+                id: item_id(index),
                 name: "#{field_name}[]",
                 value: item[:value],
                 checked: item[:checked]
@@ -74,6 +83,28 @@ module CitizensAdviceFormBuilder
           safe_join(checkboxes)
         end
         # rubocop:enable Metrics/AbcSize
+
+        def item_id(index)
+          if index.zero?
+            "#{field_id}-input"
+          else
+            "#{field_id}-#{index}"
+          end
+        end
+
+        def error_marker
+          return "" unless error?
+
+          tag.div(class: "cads-form-field__error-marker")
+        end
+
+        def form_field_classes
+          class_names("cads-form-field", "cads-form-field--has-error": error?)
+        end
+
+        def error?
+          error_message.present?
+        end
       end
     end
   end

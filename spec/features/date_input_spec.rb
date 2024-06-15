@@ -88,7 +88,7 @@ RSpec.describe "date inputs" do
         expect(page).to have_css("div.cads-form-field__error-marker")
         expect(page).to have_css("p.cads-form-field__error-message")
 
-        expect(page).to have_css("#person_date_of_birth_3i.cads-input--error")
+        expect(page).to have_css("#person_date_of_birth-input.cads-input--error")
         expect(page).to have_css("#person_date_of_birth_2i.cads-input--error")
         expect(page).to have_css("#person_date_of_birth_1i.cads-input--error")
       end
