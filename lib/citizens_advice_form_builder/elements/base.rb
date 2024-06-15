@@ -61,6 +61,20 @@ module CitizensAdviceFormBuilder
       def optional
         !!!options[:required]
       end
+
+      def error?
+        error_message.present?
+      end
+
+      def error_marker
+        return "" unless error?
+
+        tag.div(class: "cads-form-field__error-marker")
+      end
+
+      def form_field_classes
+        class_names("cads-form-field", "cads-form-field--has-error": error?)
+      end
     end
   end
 end

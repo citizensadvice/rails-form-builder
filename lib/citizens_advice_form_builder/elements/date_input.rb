@@ -112,20 +112,6 @@ module CitizensAdviceFormBuilder
       def year_value
         current_value.year if current_value.is_a?(Date)
       end
-
-      def error_marker
-        return "" unless error?
-
-        tag.div(class: "cads-form-field__error-marker")
-      end
-
-      def form_field_classes
-        class_names("cads-form-field", "cads-form-field--has-error": error?)
-      end
-
-      def error?
-        error_message.present?
-      end
     end
   end
 end
