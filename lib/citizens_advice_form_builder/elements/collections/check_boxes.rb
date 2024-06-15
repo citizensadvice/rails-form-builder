@@ -48,9 +48,17 @@ module CitizensAdviceFormBuilder
             end
           end
 
-          safe_join(checkboxes)
+          safe_join([checkboxes, hidden_field])
         end
         # rubocop:enable Metrics/AbcSize
+
+        def hidden_field
+          tag.input(
+            type: "hidden",
+            name: "#{field_name}[]",
+            value: ""
+          )
+        end
       end
     end
   end
