@@ -89,11 +89,13 @@ RSpec.describe CitizensAdviceFormBuilder::Elements::Collections::Select do
 
     context "when there is a validation error" do
       it "sets 'error_message'" do
-        model.errors.add(:ice_cream, :example, message: "example error")
+        model.errors.add(:ice_cream, :example, message: "has an example error")
 
         builder.cads_collection_select(:ice_cream, collection: collection, text_method: :name, value_method: :reference)
 
-        expect(component).to have_received(:new).with(hash_including(options: hash_including(error_message: "example error")))
+        expect(component).to have_received(:new).with(
+          hash_including(options: hash_including(error_message: "Ice cream has an example error"))
+        )
       end
     end
   end
