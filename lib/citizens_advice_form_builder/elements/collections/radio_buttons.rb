@@ -4,22 +4,15 @@ module CitizensAdviceFormBuilder
   module Elements
     module Collections
       class RadioButtons < Base
-        include ActionView::Helpers::FormOptionsHelper
-
         def render
-          component = CitizensAdviceComponents::RadioGroup.new(
-            legend: label,
-            name: field_id,
-            options: {
-              hint: hint,
-              optional: optional,
-              error_message: error_message
-            }
-          )
-
-          component.with_inputs(items)
-
-          component.render_in(@template)
+          tag.div(class: form_field_classes) do
+            safe_join([
+              error_marker,
+              tag.fieldset(class: "cads-form-field__content cads-form-group cads-form-group--radio") do
+                safe_join([legend_html, hint_html, error_message_html, radios_html])
+              end
+            ])
+          end
         end
 
         private
@@ -39,13 +32,25 @@ module CitizensAdviceFormBuilder
           end
         end
 
-        def text_method
-          @options[:text_method]
-        end
+        # rubocop:disable Metrics/AbcSize
+        def radios_html
+          radios = items.map.with_index do |item, index|
+            tag.div(class: "cads-form-group__item") do
+              tag.input(
+                class: "cads-form-group__input",
+                type: "radio",
+                id: item_id(index),
+                name: field_name.to_s,
+                value: item[:value],
+                checked: item[:checked]
+              ) +
+                tag.label(class: "cads-form-group__label", for: "#{field_id}-#{index}") { item[:label] }
+            end
+          end
 
-        def value_method
-          @options[:value_method] || text_method
+          safe_join(radios)
         end
+        # rubocop:enable Metrics/AbcSize
       end
     end
   end

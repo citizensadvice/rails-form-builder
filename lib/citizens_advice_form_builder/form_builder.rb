@@ -15,6 +15,7 @@ require CitizensAdviceComponents::Engine.root.join("app", "components", "citizen
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "checkable", "base")
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "checkable", "radio")
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "radio_group")
+require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "error_summary")
 
 module CitizensAdviceFormBuilder
   class FormBuilder < ActionView::Helpers::FormBuilder
@@ -44,6 +45,10 @@ module CitizensAdviceFormBuilder
 
     def cads_button(button_text = "Save changes", **kwargs)
       Elements::Button.new(@template, object, button_text: button_text, **kwargs).render
+    end
+
+    def cads_error_summary
+      Elements::ErrorSummary.new(@template, object, :unused).render
     end
   end
 end

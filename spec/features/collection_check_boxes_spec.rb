@@ -14,6 +14,14 @@ RSpec.describe "collection check boxes" do
     expect(page).to have_unchecked_field("person[pizza_toppings][]", type: "checkbox", with: "Olives")
   end
 
+  it "includes a hidden field to allow 'all unchecked' state to persist" do
+    expect(page).to have_field("person[pizza_toppings][]", type: "hidden", with: "")
+  end
+
+  it "uses an id for the first item that can be targetted by cads_error_summary" do
+    expect(page).to have_field("person_pizza_toppings-input")
+  end
+
   # rubocop:disable RSpec/ExampleLength
   it "remembers the selected values" do
     check "Cheese"

@@ -4,13 +4,14 @@ module CitizensAdviceFormBuilder
   module Elements
     module Collections
       class CheckBoxes < Base
-        include ActionView::Helpers::FormOptionsHelper
-
         def render
-          tag.div(class: "cads-form-field") do
-            tag.fieldset(class: "cads-form-field__content cads-form-group cads-form-group--checkbox") do
-              safe_join([legend_html, hint_html, checkboxes_html])
-            end
+          tag.div(class: form_field_classes) do
+            safe_join([
+              error_marker,
+              tag.fieldset(class: "cads-form-field__content cads-form-group cads-form-group--checkbox") do
+                safe_join([legend_html, hint_html, error_message_html, checkboxes_html])
+              end
+            ])
           end
         end
 
@@ -31,30 +32,6 @@ module CitizensAdviceFormBuilder
           end
         end
 
-        def text_method
-          @options[:text_method]
-        end
-
-        def value_method
-          @options[:value_method] || text_method
-        end
-
-        def legend_html
-          tag.legend(class: "cads-form-field__label") { safe_join([label, " ", optional_html]) }
-        end
-
-        def hint_html
-          return if hint.nil?
-
-          tag.p(class: "cads-form-field__hint") { hint }
-        end
-
-        def optional_html
-          return unless optional
-
-          tag.span(class: "cads-form-field__optional") { "(optional)" }
-        end
-
         # rubocop:disable Metrics/AbcSize
         def checkboxes_html
           checkboxes = items.map.with_index do |item, index|
@@ -62,7 +39,7 @@ module CitizensAdviceFormBuilder
               tag.input(
                 class: "cads-form-group__input",
                 type: "checkbox",
-                id: "#{field_id}-#{index}",
+                id: item_id(index),
                 name: "#{field_name}[]",
                 value: item[:value],
                 checked: item[:checked]
@@ -71,9 +48,17 @@ module CitizensAdviceFormBuilder
             end
           end
 
-          safe_join(checkboxes)
+          safe_join([checkboxes, hidden_field])
         end
         # rubocop:enable Metrics/AbcSize
+
+        def hidden_field
+          tag.input(
+            type: "hidden",
+            name: "#{field_name}[]",
+            value: ""
+          )
+        end
       end
     end
   end

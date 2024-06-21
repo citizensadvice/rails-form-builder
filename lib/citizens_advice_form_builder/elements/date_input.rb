@@ -55,7 +55,7 @@ module CitizensAdviceFormBuilder
               tag.input(
                 class: class_names("cads-input", "cads-input--2ch", "cads-input--error": error?),
                 name: date_field_name("3i"),
-                id: date_field_id("3i"),
+                id: "#{field_id}-input",
                 inputmode: "numeric",
                 value: day_value
               )
@@ -111,20 +111,6 @@ module CitizensAdviceFormBuilder
 
       def year_value
         current_value.year if current_value.is_a?(Date)
-      end
-
-      def error_marker
-        return "" unless error?
-
-        tag.div(class: "cads-form-field__error-marker")
-      end
-
-      def form_field_classes
-        class_names("cads-form-field", "cads-form-field--has-error": error?)
-      end
-
-      def error?
-        error_message.present?
       end
     end
   end

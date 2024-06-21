@@ -4,8 +4,6 @@ module CitizensAdviceFormBuilder
   module Elements
     module Collections
       class Select < Base
-        include ActionView::Helpers::FormOptionsHelper
-
         def render
           component = CitizensAdviceComponents::Select.new(
             select_options: items,
@@ -32,14 +30,6 @@ module CitizensAdviceFormBuilder
 
             [label, value]
           end
-        end
-
-        def text_method
-          @options[:text_method]
-        end
-
-        def value_method
-          @options[:value_method] || text_method
         end
       end
     end
