@@ -1,3 +1,10 @@
+## [0.1.5] - 2024-06-21
+
+- Add `cads_error_summary`
+- Allow icons to be added to buttons
+- Add support for width attribute to text inputs (thanks @davidrapson)
+- Fix submission of empty checkbox groups by including hidden field
+
 ## [0.1.4] - 2024-04-26
 
 - Add error handling to `cads_date_field`
