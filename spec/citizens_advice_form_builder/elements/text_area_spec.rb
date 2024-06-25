@@ -63,7 +63,7 @@ RSpec.describe CitizensAdviceFormBuilder::Elements::TextArea do
 
     context "when there is a validation error" do
       it "sets 'error_message'" do
-        model.errors.add(:address, :presence, message: "Address is required")
+        model.errors.add(:address, :presence, message: "is required")
 
         builder.cads_text_area(:address)
 

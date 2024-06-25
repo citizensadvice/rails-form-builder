@@ -35,7 +35,7 @@ module CitizensAdviceFormBuilder
       end
 
       def error_message
-        object.errors[attribute]&.first
+        object.errors.full_messages_for(attribute)&.first
       end
 
       def object_name
