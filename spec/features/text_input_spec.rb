@@ -23,4 +23,12 @@ RSpec.describe "text inputs" do
       end
     end
   end
+
+  describe "additional attributes" do
+    it "renders additional attributes passed to the field" do
+      within "#text_field_with_additional_attributes" do
+        expect(page).to have_css "input[data-example='custom-attribute']"
+      end
+    end
+  end
 end

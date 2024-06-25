@@ -5,7 +5,8 @@ module CitizensAdviceFormBuilder
     class TextInput < Base
       def render
         component = CitizensAdviceComponents::TextInput.new(
-          name: field_id,
+          name: field_name,
+          id: field_id,
           label: label,
           type: :text,
           width: options[:width],
@@ -14,7 +15,7 @@ module CitizensAdviceFormBuilder
             optional: optional,
             value: current_value,
             error_message: error_message,
-            additional_attributes: { name: field_name }
+            additional_attributes: options[:additional_attributes]
           }
         )
 
