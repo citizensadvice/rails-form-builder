@@ -18,7 +18,7 @@ RSpec.describe CitizensAdviceFormBuilder::Elements::TextInput do
     it "passes the attribute name to the text input component" do
       builder.cads_text_field(:name)
 
-      expect(component).to have_received(:new).with(hash_including(name: "example_form_name"))
+      expect(component).to have_received(:new).with(hash_including(name: "example_form[name]"))
     end
 
     it "passes the attribute's existing value to the text input component" do
@@ -31,6 +31,14 @@ RSpec.describe CitizensAdviceFormBuilder::Elements::TextInput do
       builder.cads_text_field(:name, label: "First name")
 
       expect(component).to have_received(:new).with(hash_including(label: "First name"))
+    end
+
+    it "passes additional attributes to the text input component" do
+      builder.cads_text_field(:name, additional_attributes: { "data-example": "custom-attribute" })
+
+      expect(component).to have_received(:new).with(
+        hash_including(options: hash_including(additional_attributes: { "data-example": "custom-attribute" }))
+      )
     end
 
     it "sets 'optional' to 'true' by default" do
