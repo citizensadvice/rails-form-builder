@@ -29,11 +29,9 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "actionpack", ">= 7.0"
-  spec.add_dependency "actionview", ">= 7.0"
-  spec.add_dependency "activemodel", ">= 7.0"
-  spec.add_dependency "activerecord", ">= 7.0"
-  spec.add_dependency "activesupport", ">= 7.0"
+  %w[actionpack actionview activemodel activerecord activesupport].each do |rails_lib|
+    spec.add_runtime_dependency rails_lib, [">= 6.0.0", "< 8.0"]
+  end
 
   spec.add_dependency "citizens_advice_components"
 end

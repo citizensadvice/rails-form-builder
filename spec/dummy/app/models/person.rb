@@ -13,5 +13,15 @@ class Person
   attribute :pizza_toppings, array: true
 
   validates :first_name, presence: true
-  validates :date_of_birth, comparison: { less_than: Time.zone.today }
+
+  # Rails 7.1 provides a comparisson validator, but as we support Rails 6.1 use a simpler method as a check
+  # validates :date_of_birth, comparison: { less_than: Time.zone.today }
+  validates :date_of_birth, presence: true
+  validate :date_must_be_in_the_past
+
+  private
+
+  def date_must_be_in_the_past
+    errors.add(:date_of_birth, "can't be in the future!") if date_of_birth&.future?
+  end
 end
