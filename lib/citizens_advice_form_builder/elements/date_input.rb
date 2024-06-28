@@ -51,7 +51,7 @@ module CitizensAdviceFormBuilder
       def day_input
         tag.div(class: "cads-date-input") do
           tag.div(class: "cads-date-input__item") do
-            tag.label(class: "cads-form-field__label", for: date_field_id("3i")) { "Day" } +
+            tag.label(class: "cads-form-field__label", for: "#{field_id}-input") { "Day" } +
               tag.input(
                 class: class_names("cads-input", "cads-input--2ch", "cads-input--error": error?),
                 name: date_field_name("3i"),
