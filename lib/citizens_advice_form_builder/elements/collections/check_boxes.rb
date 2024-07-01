@@ -44,7 +44,7 @@ module CitizensAdviceFormBuilder
                 value: item[:value],
                 checked: item[:checked]
               ) +
-                tag.label(class: "cads-form-group__label", for: "#{field_id}-#{index}") { item[:label] }
+                tag.label(class: "cads-form-group__label", for: item_id(index)) { item[:label] }
             end
           end
 

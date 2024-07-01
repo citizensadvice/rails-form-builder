@@ -10,7 +10,7 @@ RSpec.describe "date inputs" do
   context "with the default date input" do
     it "renders the 'day' input field" do
       within "#default_date_input" do
-        expect(page).to have_css("label[for=person_date_of_birth_3i]", text: "Day")
+        expect(page).to have_css("label[for=person_date_of_birth-input]", text: "Day")
         expect(page).to have_field("person[date_of_birth(3i)]")
       end
     end
