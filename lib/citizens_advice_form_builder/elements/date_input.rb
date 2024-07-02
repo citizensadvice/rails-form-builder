@@ -94,7 +94,13 @@ module CitizensAdviceFormBuilder
       end
 
       def date_field_name(suffix)
-        @template.field_name(object_name, "#{attribute}(#{suffix})")
+        # We still support Rails 6.1 but rely on the use of field_name
+        # so we provide a shim for this method for older versions of Rails.
+        if Rails::VERSION::MAJOR < 7
+          field_name_shim(object_name, "#{attribute}(#{suffix})")
+        else
+          @template.field_name(object_name, "#{attribute}(#{suffix})")
+        end
       end
 
       def date_field_id(suffix)
