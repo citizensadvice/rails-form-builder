@@ -1,3 +1,10 @@
+## [0.1.6] - 2024-07-05
+
+- Fix attribute name in error messages
+- Fix text input interface
+- Fix label "for" attribute in group fields
+- Add support for multiple Rails versions
+
 ## [0.1.5] - 2024-06-21
 
 - Add `cads_error_summary`
