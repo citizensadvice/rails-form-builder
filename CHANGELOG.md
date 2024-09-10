@@ -1,3 +1,8 @@
+## [0.2.0] - 2024-09-10
+
+- **BREAKING CHANGE**: Drop support for Rails 6.0, requires 6.1 or later now
+- Add `cads_check_box` for single checkboxes/boolean attributes
+
 ## [0.1.6] - 2024-07-05
 
 - Fix attribute name in error messages

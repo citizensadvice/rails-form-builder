@@ -22,12 +22,12 @@ GIT
 PATH
   remote: .
   specs:
-    citizens_advice_form_builder (0.1.6)
-      actionpack (>= 6.0.0, < 8.0)
-      actionview (>= 6.0.0, < 8.0)
-      activemodel (>= 6.0.0, < 8.0)
-      activerecord (>= 6.0.0, < 8.0)
-      activesupport (>= 6.0.0, < 8.0)
+    citizens_advice_form_builder (0.2.0)
+      actionpack (>= 6.1.0, < 8.0)
+      actionview (>= 6.1.0, < 8.0)
+      activemodel (>= 6.1.0, < 8.0)
+      activerecord (>= 6.1.0, < 8.0)
+      activesupport (>= 6.1.0, < 8.0)
       citizens_advice_components
 
 GEM
