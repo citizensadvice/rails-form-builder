@@ -13,7 +13,9 @@ require CitizensAdviceComponents::Engine.root.join("app", "components", "citizen
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "textarea")
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "form_group")
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "checkable", "base")
+require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "checkable", "checkbox")
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "checkable", "radio")
+require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "checkbox_single")
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "radio_group")
 require CitizensAdviceComponents::Engine.root.join("app", "components", "citizens_advice_components", "error_summary")
 
@@ -49,6 +51,10 @@ module CitizensAdviceFormBuilder
 
     def cads_error_summary
       Elements::ErrorSummary.new(@template, object, :unused).render
+    end
+
+    def cads_check_box(attribute, label: nil, **kwargs)
+      Elements::CheckBox.new(@template, object, attribute, label: label, **kwargs).render
     end
   end
 end

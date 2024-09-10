@@ -11,6 +11,8 @@ class Person
 
   attribute :date_of_birth, :date
   attribute :pizza_toppings, array: true
+  attribute :opted_in, :boolean
+  attribute :account_active, :boolean, default: true
 
   validates :first_name, presence: true
 
