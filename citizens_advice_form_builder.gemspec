@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   %w[actionpack actionview activemodel activerecord activesupport].each do |rails_lib|
-    spec.add_runtime_dependency rails_lib, [">= 6.0.0", "< 8.0"]
+    spec.add_runtime_dependency rails_lib, [">= 6.1.0", "< 8.0"]
   end
 
   spec.add_dependency "citizens_advice_components"
