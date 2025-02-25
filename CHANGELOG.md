@@ -1,3 +1,8 @@
+## Unreleased
+
+- Set minimum Ruby version of 3.2
+- Set minimum Rails version of 7.1 and add support for Rails 8
+
 ## [0.2.0] - 2024-09-10
 
 - **BREAKING CHANGE**: Drop support for Rails 6.0, requires 6.1 or later now

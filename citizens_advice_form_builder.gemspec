@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
 
   spec.summary = "Citizens Advice custom Rails form builder"
   spec.homepage = "https://github.com/citizensadvice/rails-form-builder"
-  spec.required_ruby_version = Gem::Requirement.new(">= 3.1")
+  spec.required_ruby_version = Gem::Requirement.new(">= 3.2")
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
@@ -30,7 +30,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   %w[actionpack actionview activemodel activerecord activesupport].each do |rails_lib|
-    spec.add_runtime_dependency rails_lib, [">= 6.1.0", "< 8.0"]
+    spec.add_runtime_dependency rails_lib, [">= 7.1.0", "< 9.0"]
   end
 
   spec.add_dependency "citizens_advice_components"
