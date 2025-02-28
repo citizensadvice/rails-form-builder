@@ -7,10 +7,10 @@ gemspec
 
 gem "citizens_advice_components",
     github: "citizensadvice/design-system",
-    tag: "v5.7.0",
+    tag: "v6.4.1",
     glob: "engine/*.gemspec"
 
-rails_version = ENV.fetch("RAILS_VERSION", "~> 7.1.0").to_s
+rails_version = ENV.fetch("RAILS_VERSION", "~> 8.0.0").to_s
 
 gem "actionpack", rails_version
 gem "actionview", rails_version
